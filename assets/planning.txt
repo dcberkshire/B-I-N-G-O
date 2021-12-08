@@ -1,0 +1,13 @@
+Pseudocode for Bingo
+
+Declare constant for user
+Declare constant for winning and moves
+
+Reference the game board and reset button
+
+Attach event listener to the game board
+
+Add element to the game board that represents the user's tic
+    - update the dom with the tic
+
+Check for winner
