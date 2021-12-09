@@ -1,14 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 #container {
-    width: 55%;
+    width: 50%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 
+#bingo-board {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.square {
+    padding: 15%;
+    background-size: cover;
+    background-position: center;
+    border: 0.5px;
+    border-left: 1.5px solid black;
+    border-top: 1.5px solid black;
+}
+
+.square:nth-child(5n) {
+    border-right: 1.5px solid black;
+}
+
+.square:nth-child(n + 7) {
+    border-bottom: 1.5px solid black;
+}
+
+button {
+    margin-bottom: 1rem;
+}
