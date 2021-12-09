@@ -1,4 +1,4 @@
-* {
+/* * {
     box-sizing: border-box;
 }
 
@@ -35,10 +35,10 @@ body {
     border-right: 1.5px solid black;
 }
 
-.square:nth-child(n + 7) {
+.square:nth-child(n + 2) {
     border-bottom: 1.5px solid black;
 }
 
 button {
     margin-bottom: 1rem;
-}
+} */
