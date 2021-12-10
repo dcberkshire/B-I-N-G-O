@@ -2,10 +2,17 @@ Pseudocode for Bingo
 
 Declare constant for user
 Declare constant for winning and moves
+Create game board
+    - Each square should have a unique value and identifier to see if it's checked
 
 Reference the game board and reset button
+     - Write a function to see if there's Bingo
 
 Attach event listener to the game board
+    - Add onclick handler to check a value
+    - Add onclick handler to generate new random number that hasn't been used 
+
+
 
 Add element to the game board that represents the user's tic
     - update the dom with the tic
