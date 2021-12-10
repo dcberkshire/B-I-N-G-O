@@ -43,7 +43,7 @@ playAgainBtn.addEventListener('click', init);
 // 			bingoChoices.push(`${letter}${i}`)
 // 		} else if (i <= 60) {
 // 			bingoChoices.push(`${letter}${i}`)
-// 		} else (i <= 75) 
+// 		} else (i <= 75)
 // 			bingoChoices.push(`${letter}${i}`)
 // 		};
 // 		// bingoChoices.push(`${letter}${i}`);
@@ -53,10 +53,9 @@ playAgainBtn.addEventListener('click', init);
 function init() {
 	currentUser = USER.playerOne;
 	winning = false;
-	// makeBoard = new Array(25).fill(bingoLetters);
 	ticMarks = new Array(25).fill(null);
 	createGameBoard();
-};
+}
 
 init();
 
@@ -67,19 +66,20 @@ function handleClick(event) {
 	ticMarks[squareIndex] = currentUser;
 	checkWinner();
 	createGameBoard();
-};
+	render();
+}
 
-function createGameBoard(){
+function createGameBoard() {
 	let board = [];
 	let usedNum = [];
-	for (let i = 0; i < 5; i++){
+	for (let i = 0; i < 5; i++) {
 		let arr = [];
 		while (arr.length < 5) {
 			let randomNum = Math.ceil(Math.random() * 75);
-			if (!usedNum.indexOf(randomNum) > -1){
-				usedNum.push(randomNum)
-				arr.push(randomNum);
-			}; 
+			if (!usedNum.indexOf(randomNum) > -1) {
+				usedNum.push(randomNum);
+				arr.push([randomNum, 0]);
+			};
 		};
 		board.push(arr);
 	};
@@ -87,16 +87,33 @@ function createGameBoard(){
 	return board;
 };
 
+function render(board) {
+	for (let i = 0; i < board.length; i++) {
+	const row = document.createElement('ul');
+		for (let j = 0; j < board[i]; j++){
+			const squareValue = document.createElement('li');
+			squareValue.
+		};
+	square.style.backgroundColor = ticMarks[i];
+	};
+};
+
 function checkWinner() {
-	for (let i = 0; i < WINNING_COMBOS.length; i++){
+	for (let i = 0; i < WINNING_COMBOS.length; i++) {
 		const squareOne = ticMarks[WINNING_COMBOS[i][0]];
 		const squareTwo = ticMarks[WINNING_COMBOS[i][1]];
-		const squareThree = ticMarks[WINNING_COMBOS[i][2]]
+		const squareThree = ticMarks[WINNING_COMBOS[i][2]];
 		const squareFour = ticMarks[WINNING_COMBOS[i][3]];
 		const squareFive = ticMarks[WINNING_COMBOS[i][4]];
 
-		if (squareOne && squareOne === squareTwo && squareTwo === squareThree && squareThree === squareFour && squareFour === squareFive){
+		if (
+			squareOne &&
+			squareOne === squareTwo &&
+			squareTwo === squareThree &&
+			squareThree === squareFour &&
+			squareFour === squareFive
+		) {
 			winning = squareOne;
-		};
-	};
-};
+		}
+	}
+}
