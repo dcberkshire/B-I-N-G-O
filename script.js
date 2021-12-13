@@ -91,22 +91,23 @@ function compareArray(filterList, items) {
 }
 
 function checkWinner(value) {
-	let diagnol1 = [];
-	let diagnol2 = [];
+	let diagonl1 = [];
+	let diagonl2 = [];
 	let counter = 4;
 	for (let i = 0; i < board.length; i++) {
-		diagnol1.push(board[i][i][0]);
-		diagnol2.push(board[i][counter][0]);
+		diagonl1.push(board[i][i][0]);
+		diagonl2.push(board[i][counter][0]);
 		if (i === 4) {
 			return 'what you want';
 		}
 	}
 	if (
-		compareArray(diagnol1, bingoChoices) ||
-		compareArray(diagnol2, bingoChoices)
+		compareArray(diagonl1, bingoChoices) ||
+		compareArray(diagonl2, bingoChoices)
 	) {
 		return true;
 	}
+	alert('Bingo!');
 }
 
 function addChoice() {

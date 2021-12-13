@@ -41,6 +41,7 @@ article {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+    cursor: pointer;
 }
 
 .picked {
@@ -49,6 +50,7 @@ article {
 
 button {
 	margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 ul {
