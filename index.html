@@ -7,17 +7,29 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
         <title>BINGO!</title>
     </head>
 
     <body>
-        
-        <h1>B I N G O</h1>
-            <div id="container">
-                <h2></h2>
+        <div id="container">
+            <header>
+                <h1>B I N G O</h1>
+            </header>
+            <main>
+                <article>
+                    <button class="playAgainBtn">Play Again</button>
                     <div id="bingo-board"></div>
-                 <button class="playAgainBtn">Play Again</button>
-            </div>
-        <script src="script.js"></script>
+                </article>
+                <aside>
+                    <h2>Choices</h2>
+                    <button class="choice-btn">Roll</button>
+                    <ul class="choices-list"></ul>
+                </aside>
+            </main>
+            <footer>
+                <h2>DAVID BINGO NIGHT</h2>
+            </footer>
+        </div>
     </body>
 </html>

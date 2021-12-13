@@ -1,72 +1,39 @@
 const bingoChoices = [];
 
-const gameBoard = [];
-
 const USER = {
 	playerOne: 'rgba(0, 128, 0, 0.2',
 };
 
-// const WINNING_COMBOS = [
-// 	[0, 1, 2, 3, 4],
-// 	[5, 6, 7, 8, 9],
-// 	[10, 11, 12, 13, 14],
-// 	[15, 16, 17, 18, 19],
-// 	[20, 21, 22, 23, 24],
-// 	[0, 6, 12, 18, 24],
-// 	[4, 8, 12, 16, 20],
-// 	[0, 5, 10, 15, 20],
-// 	[1, 6, 11, 16, 21],
-// 	[2, 7, 12, 17, 22],
-// 	[3, 8, 13, 18, 23],
-// 	[4, 9, 14, 19, 24],
-// ];
-
 let currentUser;
 let winning;
-let ticMarks;
 let makeBoard;
+let board;
 
 const bingoCard = document.querySelector('#bingo-board');
 const playAgainBtn = document.querySelector('button');
 const currentValue = document.querySelector('h2');
+const choiceBtn = document.querySelector('.choice-btn');
+const choicesList = document.querySelector('.choices-list');
 
-bingoCard.addEventListener('click', handleClick);
-playAgainBtn.addEventListener('click', init);
+playAgainBtn.addEventListener('click', render);
 
-// bingoLetters.forEach((letter) => {
-// 	for (let i = 0; i < 75; i++) {
-// 		if (i <= 15) {
-// 			bingoChoices.push(`${letter}${i}`)
-// 		} if (i <= 30) {
-// 			bingoChoices.push(`${letter}${i}`)
-// 		} if (i <= 45) {
-// 			bingoChoices.push(`${letter}${i}`)
-// 		} else if (i <= 60) {
-// 			bingoChoices.push(`${letter}${i}`)
-// 		} else (i <= 75)
-// 			bingoChoices.push(`${letter}${i}`)
-// 		};
-// 		// bingoChoices.push(`${letter}${i}`);
-// 		// The letter B should be numbers 1 - 15, I should be numbers 16 - 30, N should be 31 - 45, G should be 46 - 60, O should be 61 - 75
-// });
-
-function init() {
-	currentUser = USER.playerOne;
-	winning = false;
-	ticMarks = new Array(25).fill(null);
-	createGameBoard();
-}
-
-init();
+const generateRandomNum = () => Math.ceil(Math.random() * 75);
 
 function handleClick(event) {
-	const squareIndex = event.target.id;
-	if (ticMarks[squareIndex]) return;
-	if (winning) return;
-	ticMarks[squareIndex] = currentUser;
-	checkWinner();
-	createGameBoard();
-	render();
+	const value = event.target;
+	// console.log(value.innerText);
+	if (value.getAttribute('data-square')) {
+		// check if this number is inside of the bingoChoices array
+		if (bingoChoices.includes(Number(value.innerText))) {
+			// if so add the class picked
+			value.classList.add('picked');
+			// update the data attribute
+			value.setAttribute('data-square', 'picked');
+			// if already picked do nothing
+			// find the square in the array and updated it to being picked
+		}
+	}
+	checkWinner(value);
 }
 
 function createGameBoard() {
@@ -74,46 +41,93 @@ function createGameBoard() {
 	let usedNum = [];
 	for (let i = 0; i < 5; i++) {
 		let arr = [];
-		while (arr.length < 5) {
-			let randomNum = Math.ceil(Math.random() * 75);
-			if (!usedNum.indexOf(randomNum) > -1) {
+		let counter = 0;
+		while (counter < 5) {
+			let randomNum = generateRandomNum();
+			if (!usedNum.includes(randomNum)) {
 				usedNum.push(randomNum);
 				arr.push([randomNum, 0]);
-			};
-		};
+				counter++;
+			}
+		}
 		board.push(arr);
-	};
+	}
 	board[2][2] = 'FREE';
 	return board;
-};
+}
 
-function render(board) {
+function render() {
+	const removeUl = document.querySelector('.bingo-wrapper');
+	if (removeUl) bingoCard.removeChild(removeUl);
+	board = createGameBoard();
+	const ul = document.createElement('ul');
+	ul.classList.add('bingo-wrapper');
+	if (board.length > 0) {
+		board.forEach((row, index) => {
+			// console.log(row, index, 'board');
+			const li = document.createElement('li');
+			row.forEach((square) => {
+				// console.log(square, 'square');
+				const div = document.createElement('div');
+				div.innerText = square[0];
+				div.classList.add('square', 'not-picked');
+				div.setAttribute('data-square', 'not-picked');
+				li.append(div);
+			});
+			ul.append(li);
+			bingoCard.append(ul);
+		});
+	}
+}
+const a = [1, 2, 3, 4, 5]; // user board
+const b = [1, 2, 3, 4, 5, 6, 7]; // bingo list
+
+function compareArray(filterList, items) {
+	let filtered = items.filter(function (e) {
+		return this.includes(e);
+	}, filterList);
+	return filtered.length === 5;
+}
+
+function checkWinner(value) {
+	let diagnol1 = [];
+	let diagnol2 = [];
+	let counter = 4;
 	for (let i = 0; i < board.length; i++) {
-	const row = document.createElement('ul');
-		for (let j = 0; j < board[i]; j++){
-			const squareValue = document.createElement('li');
-			squareValue.
-		};
-	square.style.backgroundColor = ticMarks[i];
-	};
-};
+		diagnol1.push(board[i][i][0]);
+		diagnol2.push(board[i][counter][0]);
+		if (i === 4) {
+			return 'what you want';
+		}
+	}
+	if (
+		compareArray(diagnol1, bingoChoices) ||
+		compareArray(diagnol2, bingoChoices)
+	) {
+		return true;
+	}
+}
 
-function checkWinner() {
-	for (let i = 0; i < WINNING_COMBOS.length; i++) {
-		const squareOne = ticMarks[WINNING_COMBOS[i][0]];
-		const squareTwo = ticMarks[WINNING_COMBOS[i][1]];
-		const squareThree = ticMarks[WINNING_COMBOS[i][2]];
-		const squareFour = ticMarks[WINNING_COMBOS[i][3]];
-		const squareFive = ticMarks[WINNING_COMBOS[i][4]];
-
-		if (
-			squareOne &&
-			squareOne === squareTwo &&
-			squareTwo === squareThree &&
-			squareThree === squareFour &&
-			squareFour === squareFive
-		) {
-			winning = squareOne;
+function addChoice() {
+	let num;
+	let add = true;
+	while (add && bingoChoices.length < 75) {
+		num = generateRandomNum();
+		if (!bingoChoices.includes(num)) {
+			bingoChoices.push(num);
+			const li = document.createElement('li');
+			li.textContent = num;
+			choicesList.append(li);
+			add = false;
 		}
 	}
 }
+
+function init() {
+	currentUser = USER.playerOne;
+	winning = false;
+	render();
+}
+init();
+bingoCard.addEventListener('click', handleClick);
+choiceBtn.addEventListener('click', addChoice);
