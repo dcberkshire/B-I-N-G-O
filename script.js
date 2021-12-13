@@ -79,8 +79,9 @@ function render() {
 		});
 	}
 }
-const a = [1, 2, 3, 4, 5]; // user board
-const b = [1, 2, 3, 4, 5, 6, 7]; // bingo list
+
+const a = bingoCard.length; // user board
+const b = choicesList.length; // bingo list
 
 function compareArray(filterList, items) {
 	let filtered = items.filter(function (e) {

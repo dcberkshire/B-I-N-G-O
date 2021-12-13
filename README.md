@@ -1,4 +1,5 @@
 # B-I-N-G-O
+![bingo online](./assets/bingo-screenshot.png)
 
 ## Description
 
@@ -22,3 +23,16 @@ Browser-based Bingo game coded in JavaScript, HTML, and CSS.
 - As a user, I want to play against multiple bots.
 - As a user, I want the ability to keep my same board or get a new one.
 - As a user, I want to play different variations of Bingo in case I get bored and would like to change things up. (i.e win by creating an 'L' on the board, win by blackout etc.)
+
+### Wireframes
+![bingo startup](./assets/bingo-wireframe.jpg)
+
+## Installation
+1. Clone the repository down to your machine.
+2. Open the `index.html` file in your browser.
+
+### Unsolved problems
+1. Winning methods and a message to let you know that you've one.
+2. Getting the 'FREE' box.
+3. Looks. The game is visually displeasing.
+4. Creating the setInterval for the choices to be displayed automatically.
