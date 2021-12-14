@@ -1,4 +1,4 @@
-const bingoChoices = [];
+const bingoChoices = ['F'];
 
 const USER = {
 	playerOne: 'rgba(0, 128, 0, 0.2',
@@ -24,7 +24,7 @@ function handleClick(event) {
 	// console.log(value.innerText);
 	if (value.getAttribute('data-square')) {
 		// check if this number is inside of the bingoChoices array
-		if (bingoChoices.includes(Number(value.innerText))) {
+		if (bingoChoices.includes(Number(value.innerText) || 'F')) {
 			// if so add the class picked
 			value.classList.add('picked');
 			// update the data attribute
@@ -48,11 +48,12 @@ function createGameBoard() {
 				usedNum.push(randomNum);
 				arr.push([randomNum, 0]);
 				counter++;
+				// console.log(randomNum);
 			}
 		}
 		board.push(arr);
 	}
-	board[2][2] = 'FREE';
+	board[2][2][0] = 'F';
 	return board;
 }
 
@@ -91,23 +92,22 @@ function compareArray(filterList, items) {
 }
 
 function checkWinner(value) {
+	console.log('hit');
 	let diagonl1 = [];
 	let diagonl2 = [];
 	let counter = 4;
 	for (let i = 0; i < board.length; i++) {
 		diagonl1.push(board[i][i][0]);
 		diagonl2.push(board[i][counter][0]);
-		if (i === 4) {
-			return 'what you want';
-		}
-	}
+		counter--;
+	} 
+	console.log({bingoChoices, diagonl1, diagonl2})
 	if (
 		compareArray(diagonl1, bingoChoices) ||
 		compareArray(diagonl2, bingoChoices)
 	) {
-		return true;
+		return alert('BINGO!');
 	}
-	alert('Bingo!');
 }
 
 function addChoice() {
